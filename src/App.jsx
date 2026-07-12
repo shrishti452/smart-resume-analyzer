@@ -1,17 +1,14 @@
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero/Hero";
 
 function App() {
   const projectName = "Smart Resume Analyzer";
 
   return (
     <div className="app">
-      <Navbar title="Smart Resume Analyzer" />
-
-      <section className="hero">
-        <h1>{projectName}</h1>
-        <p>Welcome to our project 🚀</p>
-      </section>
+      <Navbar title={projectName} />
+      <Hero />
     </div>
   );
 }
