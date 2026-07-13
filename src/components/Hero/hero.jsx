@@ -43,7 +43,15 @@ function Hero() {
 
                 <div className="resume-card">
 
-                    <h3>Resume Analysis</h3>
+                    <div className="card-header">
+
+                        <h3>Resume Analysis</h3>
+
+                        <span className="status">
+                            Live
+                        </span>
+
+                    </div>
 
                     <div className="scan-bar"></div>
 
@@ -55,7 +63,19 @@ function Hero() {
 
                     </div>
 
+                    <div className="stats">
 
+                        <div className="stat">
+                            <h4>15+</h4>
+                            <p>Skills Found</p>
+                        </div>
+
+                        <div className="stat">
+                            <h4>8</h4>
+                            <p>Missing</p>
+                        </div>
+
+                    </div>
                     <div className="skills">
 
                         <span>React</span>
