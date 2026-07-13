@@ -58,8 +58,30 @@ function Hero() {
 
                     <div className="score-circle">
 
-                        <h2>92%</h2>
-                        <p>ATS Score</p>
+                        <svg className="progress-ring" width="180" height="180">
+
+                            <circle
+                                className="progress-bg"
+                                cx="90"
+                                cy="90"
+                                r="72"
+                            />
+
+                            <circle
+                                className="progress"
+                                cx="90"
+                                cy="90"
+                                r="72"
+                            />
+
+                        </svg>
+
+                        <div className="score-content">
+
+                            <h2>92%</h2>
+                            <p>ATS Score</p>
+
+                        </div>
 
                     </div>
 
