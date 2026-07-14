@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Features from "./components/Features/Features";
 import HowItWorks from "./components/HowItWorks/HowItWorks";
+import WhyChooseUs from "./components/WhyChooseUs/whychooseus"
 
 function App() {
   const projectName = "Smart Resume Analyzer";
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <Features />
       <HowItWorks />
+      <WhyChooseUs />
     </div>
   );
 }
