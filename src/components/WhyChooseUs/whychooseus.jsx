@@ -41,7 +41,7 @@ function WhyChooseUs() {
     ];
 
     return (
-        <section className="why">
+        <section className="why" id="why-us">
 
             <div className="why-header">
 

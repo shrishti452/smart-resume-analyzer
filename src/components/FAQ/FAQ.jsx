@@ -46,7 +46,7 @@ function FAQ() {
 
     return (
 
-        <section className="faq">
+        <section className="faq" id="faq">
 
 
             <div className="faq-header">

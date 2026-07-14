@@ -4,7 +4,7 @@ function Footer() {
 
     return (
 
-        <footer className="footer">
+        <footer className="footer" id="contact">
 
             <div className="footer-container">
 
@@ -33,19 +33,19 @@ function Footer() {
                     </h3>
 
 
-                    <a href="#">
+                    <a href="#home">
                         Home
                     </a>
 
-                    <a href="#">
+                    <a href="#features">
                         Features
                     </a>
 
-                    <a href="#">
+                    <a href="#how-it-works">
                         How It Works
                     </a>
 
-                    <a href="#">
+                    <a href="#faq">
                         FAQ
                     </a>
 

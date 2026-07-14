@@ -33,7 +33,7 @@ function HowItWorks() {
     ];
 
     return (
-        <section className="how-it-works">
+        <section className="how-it-works" id="how-it-works">
 
             <div className="how-header">
 
