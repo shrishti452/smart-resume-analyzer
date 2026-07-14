@@ -30,9 +30,9 @@ function Hero() {
                         Analyze Resume
                     </button>
 
-                    <button className="secondary-btn">
+                    <a href="#features" className="secondary-btn">
                         Explore Features
-                    </button>
+                    </a>
 
                 </div>
 
@@ -55,6 +55,9 @@ function Hero() {
 
                     <div className="scan-bar"></div>
 
+                    <div className="scan-text">
+                        AI is analyzing your resume...
+                    </div>
 
                     <div className="score-circle">
 
