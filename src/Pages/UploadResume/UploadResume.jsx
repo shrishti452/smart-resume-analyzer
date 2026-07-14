@@ -1,7 +1,8 @@
+import { useState } from "react";
 import "./UploadResume.css";
 
 function UploadResume() {
-
+    const [selectedFile, setSelectedFile] = useState(null);
     return (
 
         <div className="upload-page">
@@ -42,11 +43,20 @@ function UploadResume() {
 
                     <input
                         type="file"
-                        accept=".pdf,.docx"
+                        accept=".pdf,.doc,.docx"
+                        onChange={(e) => {
+                            setSelectedFile(e.target.files[0]);
+                        }}
                     />
 
+                    {selectedFile && (
+                        <p className="selected-file">
+                            Selected File: {selectedFile.name}
+                        </p>
+                    )}
 
-                    <button>
+
+                    <button disabled={!selectedFile}>
                         Analyze Resume
                     </button>
 
