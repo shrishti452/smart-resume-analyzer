@@ -5,6 +5,7 @@ import Features from "./components/Features/Features";
 import HowItWorks from "./components/HowItWorks/HowItWorks";
 import WhyChooseUs from "./components/WhyChooseUs/whychooseus";
 import Testimonials from "./components/Testimonials/Testimonials";
+import FAQ from "./components/FAQ/FAQ";
 
 function App() {
   const projectName = "Smart Resume Analyzer";
@@ -17,6 +18,7 @@ function App() {
       <HowItWorks />
       <WhyChooseUs />
       <Testimonials />
+      <FAQ />
     </div>
   );
 }
