@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import UploadResume from "../pages/UploadResume/UploadResume";
 
 function AppRoutes() {
     return (
@@ -15,6 +16,10 @@ function AppRoutes() {
                 <Route
                     path="/dashboard"
                     element={<Dashboard />}
+                />
+                <Route
+                    path="/upload-resume"
+                    element={<UploadResume />}
                 />
             </Routes>
         </BrowserRouter>

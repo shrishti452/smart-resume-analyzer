@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -59,9 +60,11 @@ function Dashboard() {
                 </p>
 
 
-                <button>
-                    Upload Resume
-                </button>
+                <Link to="/upload-resume">
+                    <button>
+                        Upload Resume
+                    </button>
+                </Link>
 
 
             </div>
