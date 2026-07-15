@@ -1,8 +1,28 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
 function Dashboard() {
+    const [resumes, setResumes] = useState([]);
+    useEffect(() => {
 
+        fetch("http://127.0.0.1:5000/resumes")
+            .then((response) => response.json())
+            .then((data) => {
+
+                console.log("Resume Data:", data);
+
+                setResumes(data);
+
+            })
+            .catch((error) => {
+
+                console.error(error);
+
+            });
+
+    }, []);
+    const latestResume = resumes.length > 0 ? resumes[resumes.length - 1] : null;
     return (
 
         <div className="dashboard">
@@ -24,7 +44,9 @@ function Dashboard() {
 
                 <div className="stat-card">
 
-                    <h2>--</h2>
+                    <h2>
+                        {latestResume ? latestResume.ats_score : "--"}
+                    </h2>
                     <p>ATS Score</p>
 
                 </div>
@@ -32,7 +54,9 @@ function Dashboard() {
 
                 <div className="stat-card">
 
-                    <h2>--</h2>
+                    <h2>
+                        {latestResume ? latestResume.skills.length : "--"}
+                    </h2>
                     <p>Skills Found</p>
 
                 </div>
@@ -40,7 +64,7 @@ function Dashboard() {
 
                 <div className="stat-card">
 
-                    <h2>--</h2>
+                    <h2>{resumes.length}</h2>
                     <p>Reports</p>
 
                 </div>
