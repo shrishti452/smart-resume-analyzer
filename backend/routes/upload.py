@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from services.pdf_service import extract_text_from_pdf
 from services.ats_service import calculate_ats_score
 from services.skill_service import extract_skills
+from services.suggestion_service import generate_suggestions
 import os
 
 upload_bp = Blueprint("upload", __name__)
@@ -36,6 +37,8 @@ def upload_resume():
 
     extracted_skills = extract_skills(text)
 
+    suggestions = generate_suggestions(extracted_skills)
+
     job_keywords = [
     "Python",
     "React",
@@ -58,5 +61,6 @@ def upload_resume():
     "extracted_text": text,
     "ats_score": ats_score,
     "matched_skills": matched_skills,
-    "skills": extracted_skills
+    "skills": extracted_skills,
+    "suggestions": suggestions
 })
