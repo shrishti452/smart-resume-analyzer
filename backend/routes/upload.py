@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from services.pdf_service import extract_text_from_pdf
+from services.ats_service import calculate_ats_score
 import os
 
 upload_bp = Blueprint("upload", __name__)
@@ -32,10 +33,26 @@ def upload_resume():
 
     text = extract_text_from_pdf(file_path)
 
+    job_keywords = [
+    "Python",
+    "React",
+    "JavaScript",
+    "SQL",
+    "Machine Learning",
+    "Flask",
+    "Node.js"
+]
+
+    ats_score, matched_skills = calculate_ats_score(
+    text,
+    job_keywords
+)
 
     return jsonify({
-        "success": True,
-        "message": "Resume uploaded successfully",
-        "filename": file.filename,
-        "extracted_text": text
-    })
+    "success": True,
+    "message": "Resume uploaded successfully",
+    "filename": file.filename,
+    "extracted_text": text,
+    "ats_score": ats_score,
+    "matched_skills": matched_skills
+})
