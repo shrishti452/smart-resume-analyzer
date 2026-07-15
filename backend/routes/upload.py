@@ -3,6 +3,8 @@ from services.pdf_service import extract_text_from_pdf
 from services.ats_service import calculate_ats_score
 from services.skill_service import extract_skills
 from services.suggestion_service import generate_suggestions
+from models.resume import Resume
+from extensions import db
 import os
 
 upload_bp = Blueprint("upload", __name__)
@@ -53,6 +55,16 @@ def upload_resume():
     text,
     job_keywords
 )
+    
+    resume = Resume(
+    filename=file.filename,
+    ats_score=ats_score,
+    skills=", ".join(extracted_skills),
+    suggestions="\n".join(suggestions)
+)
+
+    db.session.add(resume)
+    db.session.commit()
 
     return jsonify({
     "success": True,
