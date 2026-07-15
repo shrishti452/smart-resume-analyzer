@@ -3,6 +3,41 @@ import "./UploadResume.css";
 
 function UploadResume() {
     const [selectedFile, setSelectedFile] = useState(null);
+    const handleUpload = async () => {
+
+        if (!selectedFile) return;
+
+        const formData = new FormData();
+
+        formData.append("resume", selectedFile);
+
+        try {
+
+            const response = await fetch("http://127.0.0.1:5000/upload", {
+
+                method: "POST",
+
+                body: formData,
+
+            });
+
+            const data = await response.json();
+
+            console.log(data);
+
+            alert(data.message);
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            alert("Upload Failed");
+
+        }
+
+    };
     return (
 
         <div className="upload-page">
@@ -56,7 +91,10 @@ function UploadResume() {
                     )}
 
 
-                    <button disabled={!selectedFile}>
+                    <button
+                        disabled={!selectedFile}
+                        onClick={handleUpload}
+                    >
                         Analyze Resume
                     </button>
 
