@@ -22,6 +22,8 @@ def upload_resume():
         }), 400
 
     file = request.files["resume"]
+    job_description = request.form.get("job_description")
+    print("Job Description:", job_description)
 
     if file.filename == "":
         return jsonify({
@@ -41,19 +43,12 @@ def upload_resume():
 
     suggestions = generate_suggestions(extracted_skills)
 
-    job_keywords = [
-    "Python",
-    "React",
-    "JavaScript",
-    "SQL",
-    "Machine Learning",
-    "Flask",
-    "Node.js"
-]
+    job_skills = extract_skills(job_description)
+    print("Job Skills:", job_skills)
 
-    ats_score, matched_skills = calculate_ats_score(
+    ats_score, matched_skills, missing_skills = calculate_ats_score(
     text,
-    job_keywords
+    job_skills
 )
     
     resume = Resume(
@@ -73,6 +68,7 @@ def upload_resume():
     "extracted_text": text,
     "ats_score": ats_score,
     "matched_skills": matched_skills,
+    "missing_skills": missing_skills,
     "skills": extracted_skills,
     "suggestions": suggestions
 })

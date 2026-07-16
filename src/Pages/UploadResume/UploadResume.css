@@ -244,3 +244,25 @@
     }
 
 }
+.upload-card textarea {
+    width: 100%;
+    min-height: 140px;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.upload-card textarea:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+}
+
+.upload-card textarea::placeholder {
+    color: #999;
+}

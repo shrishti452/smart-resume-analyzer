@@ -3,13 +3,18 @@ import "./UploadResume.css";
 
 function UploadResume() {
     const [selectedFile, setSelectedFile] = useState(null);
+    const [jobDescription, setJobDescription] = useState("");
     const handleUpload = async () => {
 
-        if (!selectedFile) return;
+        if (!selectedFile || !jobDescription) {
+            alert("Please upload resume and add job description");
+            return;
+        }
 
         const formData = new FormData();
 
         formData.append("resume", selectedFile);
+        formData.append("job_description", jobDescription);
 
         try {
 
@@ -90,6 +95,11 @@ function UploadResume() {
                         </p>
                     )}
 
+                    <textarea
+                        placeholder="Paste Job Description here..."
+                        value={jobDescription}
+                        onChange={(e) => setJobDescription(e.target.value)}
+                    />
 
                     <button
                         disabled={!selectedFile}

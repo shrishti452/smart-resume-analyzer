@@ -1,4 +1,5 @@
-def extract_skills(resume_text):
+import re
+def extract_skills(text):
 
     skills_database = [
         "Python",
@@ -25,12 +26,14 @@ def extract_skills(resume_text):
         "Azure"
     ]
 
-    resume_text = resume_text.lower()
+    text = text.lower()
 
     extracted_skills = []
 
     for skill in skills_database:
-        if skill.lower() in resume_text:
+        pattern = r"\b" + re.escape(skill.lower()) + r"\b"
+
+        if re.search(pattern, text):
             extracted_skills.append(skill)
 
     return extracted_skills
