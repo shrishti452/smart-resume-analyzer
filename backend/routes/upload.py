@@ -41,8 +41,6 @@ def upload_resume():
 
     extracted_skills = extract_skills(text)
 
-    suggestions = generate_suggestions(extracted_skills)
-
     job_skills = extract_skills(job_description)
     print("Job Skills:", job_skills)
 
@@ -50,6 +48,8 @@ def upload_resume():
     text,
     job_skills
 )
+
+    suggestions = generate_suggestions(missing_skills)
     
     resume = Resume(
     filename=file.filename,

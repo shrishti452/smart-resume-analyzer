@@ -1,24 +1,46 @@
-def generate_suggestions(extracted_skills):
+def generate_suggestions(missing_skills):
 
     suggestions = []
 
-    recommended_skills = {
-        "Node.js": "Add Node.js to improve backend development skills",
-        "MongoDB": "Learn MongoDB for better full stack development",
-        "Docker": "Add Docker knowledge for deployment and DevOps skills",
-        "AWS": "Learn AWS cloud services to strengthen your profile",
-        "GitHub": "Showcase more GitHub projects and contributions",
-        "Machine Learning": "Add ML projects if applying for AI roles"
+    suggestion_map = {
+
+        "Node.js": "Learn Node.js to strengthen your backend development skills.",
+
+        "MongoDB": "Add MongoDB experience for full stack development roles.",
+
+        "Docker": "Learn Docker for deployment and DevOps workflows.",
+
+        "AWS": "Gain hands-on experience with AWS cloud services.",
+
+        "GitHub": "Build and publish more projects on GitHub.",
+
+        "Machine Learning": "Include Machine Learning projects relevant to this role.",
+
+        "React": "Improve your React knowledge by building real-world projects.",
+
+        "Python": "Strengthen your Python skills with practical applications.",
+
+        "Java": "Practice Java by solving DSA problems and building projects.",
+
+        "SQL": "Improve SQL skills with database design and query practice.",
+
+        "C": "Strengthen your C programming fundamentals.",
+
+        "C++": "Practice C++ with object-oriented programming and DSA."
     }
 
-    for skill, message in recommended_skills.items():
+    for skill in missing_skills:
 
-        if skill not in extracted_skills:
-            suggestions.append(message)
+        if skill in suggestion_map:
+            suggestions.append(suggestion_map[skill])
+
+        else:
+            suggestions.append(f"Consider learning {skill} to better match this job description.")
 
     if len(suggestions) == 0:
+
         suggestions.append(
-            "Your resume has a strong skill set. Keep adding impactful projects."
+            "Excellent! Your resume matches the required job skills."
         )
 
     return suggestions

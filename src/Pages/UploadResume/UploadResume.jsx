@@ -4,6 +4,7 @@ import "./UploadResume.css";
 function UploadResume() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [jobDescription, setJobDescription] = useState("");
+    const [analysis, setAnalysis] = useState(null);
     const handleUpload = async () => {
 
         if (!selectedFile || !jobDescription) {
@@ -29,6 +30,8 @@ function UploadResume() {
             const data = await response.json();
 
             console.log(data);
+
+            setAnalysis(data);
 
             alert(data.message);
 
@@ -108,6 +111,147 @@ function UploadResume() {
                         Analyze Resume
                     </button>
 
+                    {analysis && (
+
+                        <div className="analysis-result">
+
+                            <h2>
+                                Resume Intelligence Report
+                            </h2>
+
+
+                            {/* ATS SCORE */}
+
+                            <div className="ats-card">
+
+                                <div className="score-circle">
+
+                                    {analysis.ats_score}%
+
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        ATS Compatibility
+                                    </h3>
+
+                                    <p>
+                                        Resume matching score with job requirements
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            {/* MATCHED SKILLS */}
+
+                            <div className="result-section">
+
+                                <h3>
+                                    ✅ Matched Skills
+                                </h3>
+
+
+                                <div className="skill-container">
+
+                                    {
+                                        analysis.matched_skills.map((skill, index) => (
+
+                                            <span
+                                                className="skill-badge"
+                                                key={index}
+                                            >
+                                                {skill}
+                                            </span>
+
+                                        ))
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                            {/* MISSING SKILLS */}
+
+                            <div className="result-section">
+
+                                <h3>
+                                    ⚠️ Missing Skills
+                                </h3>
+
+
+                                <div className="skill-container">
+
+                                    {
+                                        analysis.missing_skills.map((skill, index) => (
+
+                                            <span
+                                                className="missing-badge"
+                                                key={index}
+                                            >
+                                                {skill}
+                                            </span>
+
+                                        ))
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                            {/* SUGGESTIONS */}
+
+                            <div className="result-section">
+
+                                <h3>
+                                    🤖 AI Suggestions
+                                </h3>
+
+
+                                <div className="suggestion-container">
+
+                                    {
+                                        analysis.suggestions.map((item, index) => (
+
+                                            <div
+                                                className="suggestion-card"
+                                                key={index}
+                                            >
+
+                                                💡 {item}
+
+                                            </div>
+
+                                        ))
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    )}
 
                 </div>
 

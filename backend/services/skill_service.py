@@ -2,29 +2,68 @@ import re
 def extract_skills(text):
 
     skills_database = [
-        "Python",
-        "Java",
-        "JavaScript",
-        "React",
-        "HTML",
-        "CSS",
-        "Flask",
-        "Django",
-        "SQL",
-        "MySQL",
-        "SQLite",
-        "MongoDB",
-        "Node.js",
-        "Express.js",
-        "Machine Learning",
-        "Deep Learning",
-        "Artificial Intelligence",
-        "Git",
-        "GitHub",
-        "Docker",
-        "AWS",
-        "Azure"
-    ]
+
+    # Programming Languages
+    "C",
+    "C++",
+    "C#",
+    "Python",
+    "Java",
+    "JavaScript",
+    "TypeScript",
+    "Go",
+    "PHP",
+
+    # Frontend
+    "HTML",
+    "CSS",
+    "React",
+    "Next.js",
+    "Angular",
+    "Vue.js",
+    "Bootstrap",
+    "Tailwind CSS",
+
+    # Backend
+    "Node.js",
+    "Express.js",
+    "Flask",
+    "Django",
+    "Spring Boot",
+
+    # Databases
+    "SQL",
+    "MySQL",
+    "PostgreSQL",
+    "SQLite",
+    "MongoDB",
+    "Firebase",
+
+    # AI / ML
+    "Machine Learning",
+    "Deep Learning",
+    "Artificial Intelligence",
+    "TensorFlow",
+    "PyTorch",
+    "Scikit-learn",
+    "OpenCV",
+
+    # Cloud & DevOps
+    "Docker",
+    "Kubernetes",
+    "AWS",
+    "Azure",
+    "GCP",
+    "Git",
+    "GitHub",
+    "Linux",
+
+    # Tools
+    "VS Code",
+    "Postman",
+    "Figma"
+
+]
 
     text = text.lower()
 
