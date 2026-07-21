@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 import Navbar from "../../components/Navbar/Navbar";
+import ResumeHistory from "../../components/ResumeHistory/ResumeHistory";
 
 function Dashboard() {
     const [resumes, setResumes] = useState([]);
@@ -46,80 +47,124 @@ function Dashboard() {
                     </p>
 
                 </div>
-            
 
 
-            <div className="dashboard-stats">
 
-                <div className="stat-card">
+                <div className="dashboard-stats">
+
+                    <div className="stat-card">
+
+                        <h2>
+                            {latestResume ? latestResume.ats_score : "--"}
+                        </h2>
+                        <p>ATS Score</p>
+
+                    </div>
+
+
+                    <div className="stat-card">
+
+                        <h2>
+                            {latestResume ? latestResume.skills.length : "--"}
+                        </h2>
+                        <p>Skills Found</p>
+
+                    </div>
+
+
+                    <div className="stat-card">
+
+                        <h2>{resumes.length}</h2>
+                        <p>Reports</p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div className="upload-box">
 
                     <h2>
-                        {latestResume ? latestResume.ats_score : "--"}
+                        Upload Your Resume
                     </h2>
-                    <p>ATS Score</p>
+
+                    <p>
+                        Upload PDF or DOCX file for AI analysis
+                    </p>
+
+
+                    <Link to="/upload-resume">
+                        <button>
+                            Upload Resume
+                        </button>
+                    </Link>
+
 
                 </div>
 
 
-                <div className="stat-card">
+
+                <div className="recent-box">
 
                     <h2>
-                        {latestResume ? latestResume.skills.length : "--"}
+                        Recent Analysis
                     </h2>
-                    <p>Skills Found</p>
+
+                    {
+                        latestResume ? (
+                            <>
+                                <div className="recent-content">
+
+                                    <h3>
+                                        📄 {latestResume.filename}
+                                    </h3>
+
+
+                                    <div className="recent-stats">
+
+                                        <div>
+                                            <span>ATS Score</span>
+                                            <strong>{latestResume.ats_score}%</strong>
+                                        </div>
+
+
+                                        <div>
+                                            <span>Skills Found</span>
+                                            <strong>{latestResume.skills.length}</strong>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div className="suggestion-box">
+
+                                        <h4>
+                                            💡 Suggestion
+                                        </h4>
+
+                                        <p>
+                                            {latestResume.suggestions[0]}
+                                        </p>
+
+                                    </div>
+
+                                </div>
+                            </>
+                        ) : (
+                            <p>
+                                No analysis available yet.
+                            </p>
+                        )
+                    }
 
                 </div>
 
+                <ResumeHistory resumes={resumes} />
 
-                <div className="stat-card">
+            </div >
 
-                    <h2>{resumes.length}</h2>
-                    <p>Reports</p>
-
-                </div>
-
-            </div>
-
-
-
-            <div className="upload-box">
-
-                <h2>
-                    Upload Your Resume
-                </h2>
-
-                <p>
-                    Upload PDF or DOCX file for AI analysis
-                </p>
-
-
-                <Link to="/upload-resume">
-                    <button>
-                        Upload Resume
-                    </button>
-                </Link>
-
-
-            </div>
-
-
-
-            <div className="recent-box">
-
-                <h2>
-                    Recent Analysis
-                </h2>
-
-                <p>
-                    No analysis available yet.
-                </p>
-
-            </div>
-
-
-        </div >
-
-            </>
+        </>
     );
 
 }
