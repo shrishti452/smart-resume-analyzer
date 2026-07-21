@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./UploadResume.css";
+import Navbar from "../../components/Navbar/Navbar";
 
 function UploadResume() {
 
@@ -85,6 +86,8 @@ function UploadResume() {
     };
         return (
 
+            <>
+            <Navbar />
         <div className="upload-page">
 
             <div className="upload-container">
@@ -245,6 +248,7 @@ function UploadResume() {
             </div>
 
         </div>
+        </>
 
     );
 
