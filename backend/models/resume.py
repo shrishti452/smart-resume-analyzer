@@ -10,6 +10,8 @@ class Resume(db.Model):
         primary_key=True
     )
 
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
     filename = db.Column(
         db.String(255),
         nullable=False

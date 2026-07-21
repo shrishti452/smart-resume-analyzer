@@ -13,6 +13,7 @@ def extract_skills(text):
     "TypeScript",
     "Go",
     "PHP",
+    "R",
 
     # Frontend
     "HTML",

@@ -6,22 +6,28 @@ function Dashboard() {
     const [resumes, setResumes] = useState([]);
     useEffect(() => {
 
-        fetch("http://127.0.0.1:5000/resumes")
-            .then((response) => response.json())
-            .then((data) => {
+    const token = localStorage.getItem("token");
 
-                console.log("Resume Data:", data);
+    fetch("http://127.0.0.1:5000/resumes", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then((response) => response.json())
+    .then((data) => {
 
-                setResumes(data);
+        console.log("Resume Data:", data);
 
-            })
-            .catch((error) => {
+        setResumes(data);
 
-                console.error(error);
+    })
+    .catch((error) => {
 
-            });
+        console.error(error);
 
-    }, []);
+    });
+
+}, []);
     const latestResume = resumes.length > 0 ? resumes[resumes.length - 1] : null;
     return (
 
