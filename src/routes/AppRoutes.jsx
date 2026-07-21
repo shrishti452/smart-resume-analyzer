@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import UploadResume from "../pages/UploadResume/UploadResume";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 function AppRoutes() {
     return (
@@ -15,11 +16,20 @@ function AppRoutes() {
                 <Route path="/register" element={<Register />} />
                 <Route
                     path="/dashboard"
-                    element={<Dashboard />}
+                    element={
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
+                    }
                 />
+
                 <Route
                     path="/upload-resume"
-                    element={<UploadResume />}
+                    element={
+                        <ProtectedRoute>
+                            <UploadResume />
+                        </ProtectedRoute>
+                    }
                 />
             </Routes>
         </BrowserRouter>
