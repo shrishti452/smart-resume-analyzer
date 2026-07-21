@@ -1,6 +1,7 @@
 import "./Navbar.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 function Navbar() {
 
@@ -8,17 +9,16 @@ function Navbar() {
 
     const navigate = useNavigate();
 
-    const token = localStorage.getItem("token");
+    const { token, logout } = useAuth();
 
 
     const handleLogout = () => {
 
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+    logout();
 
-        navigate("/login");
+    navigate("/login", { replace: true });
 
-    };
+};
 
 
     return (
