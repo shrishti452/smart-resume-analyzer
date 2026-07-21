@@ -1,14 +1,27 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./UploadResume.css";
 
 function UploadResume() {
+
+    const navigate = useNavigate();
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [jobDescription, setJobDescription] = useState("");
     const [analysis, setAnalysis] = useState(null);
+
     const handleUpload = async () => {
 
         if (!selectedFile || !jobDescription) {
             alert("Please upload resume and add job description");
+            return;
+        }
+
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            alert("Please login first");
+            navigate("/login");
             return;
         }
 
@@ -19,15 +32,39 @@ function UploadResume() {
 
         try {
 
-            const response = await fetch("http://127.0.0.1:5000/upload", {
+            const response = await fetch(
+                "http://127.0.0.1:5000/upload",
+                {
+                    method: "POST",
 
-                method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
 
-                body: formData,
-
-            });
+                    body: formData,
+                }
+            );
 
             const data = await response.json();
+
+            if (response.status === 401) {
+
+                alert("Session expired. Please login again.");
+
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+
+                navigate("/login");
+
+                return;
+            }
+
+            if (!response.ok) {
+
+                alert(data.message || "Upload Failed");
+
+                return;
+            }
 
             console.log(data);
 
@@ -46,43 +83,34 @@ function UploadResume() {
         }
 
     };
-    return (
+        return (
 
         <div className="upload-page">
 
-
             <div className="upload-container">
-
 
                 <h1>
                     Upload Your Resume
                 </h1>
-
 
                 <p>
                     Upload your resume and let AI analyze your skills,
                     ATS compatibility and improvements.
                 </p>
 
-
-
                 <div className="upload-card">
-
 
                     <div className="upload-icon">
                         📄
                     </div>
 
-
                     <h2>
                         Drag & Drop Resume
                     </h2>
 
-
                     <p>
                         Support PDF and DOCX files
                     </p>
-
 
                     <input
                         type="file"
@@ -119,17 +147,11 @@ function UploadResume() {
                                 Resume Intelligence Report
                             </h2>
 
-
-                            {/* ATS SCORE */}
-
                             <div className="ats-card">
 
                                 <div className="score-circle">
-
                                     {analysis.ats_score}%
-
                                 </div>
-
 
                                 <div>
 
@@ -145,45 +167,28 @@ function UploadResume() {
 
                             </div>
 
-
-
-
-
-                            {/* MATCHED SKILLS */}
-
                             <div className="result-section">
 
                                 <h3>
                                     ✅ Matched Skills
                                 </h3>
 
-
                                 <div className="skill-container">
 
-                                    {
-                                        analysis.matched_skills.map((skill, index) => (
+                                    {analysis.matched_skills.map((skill, index) => (
 
-                                            <span
-                                                className="skill-badge"
-                                                key={index}
-                                            >
-                                                {skill}
-                                            </span>
+                                        <span
+                                            className="skill-badge"
+                                            key={index}
+                                        >
+                                            {skill}
+                                        </span>
 
-                                        ))
-                                    }
+                                    ))}
 
                                 </div>
 
                             </div>
-
-
-
-
-
-
-
-                            {/* MISSING SKILLS */}
 
                             <div className="result-section">
 
@@ -191,33 +196,22 @@ function UploadResume() {
                                     ⚠️ Missing Skills
                                 </h3>
 
-
                                 <div className="skill-container">
 
-                                    {
-                                        analysis.missing_skills.map((skill, index) => (
+                                    {analysis.missing_skills.map((skill, index) => (
 
-                                            <span
-                                                className="missing-badge"
-                                                key={index}
-                                            >
-                                                {skill}
-                                            </span>
+                                        <span
+                                            className="missing-badge"
+                                            key={index}
+                                        >
+                                            {skill}
+                                        </span>
 
-                                        ))
-                                    }
+                                    ))}
 
                                 </div>
 
                             </div>
-
-
-
-
-
-
-
-                            {/* SUGGESTIONS */}
 
                             <div className="result-section">
 
@@ -225,29 +219,22 @@ function UploadResume() {
                                     🤖 AI Suggestions
                                 </h3>
 
-
                                 <div className="suggestion-container">
 
-                                    {
-                                        analysis.suggestions.map((item, index) => (
+                                    {analysis.suggestions.map((item, index) => (
 
-                                            <div
-                                                className="suggestion-card"
-                                                key={index}
-                                            >
+                                        <div
+                                            className="suggestion-card"
+                                            key={index}
+                                        >
+                                            💡 {item}
+                                        </div>
 
-                                                💡 {item}
-
-                                            </div>
-
-                                        ))
-                                    }
+                                    ))}
 
                                 </div>
 
                             </div>
-
-
 
                         </div>
 
@@ -255,15 +242,12 @@ function UploadResume() {
 
                 </div>
 
-
             </div>
-
 
         </div>
 
     );
 
 }
-
 
 export default UploadResume;

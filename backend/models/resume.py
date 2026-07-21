@@ -5,15 +5,37 @@ from datetime import datetime
 class Resume(db.Model):
     __tablename__ = "resumes"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
 
-    filename = db.Column(db.String(255), nullable=False)
+    filename = db.Column(
+        db.String(255),
+        nullable=False
+    )
 
-    ats_score = db.Column(db.Integer, nullable=False)
+    ats_score = db.Column(
+        db.Integer,
+        nullable=False
+    )
 
-    skills = db.Column(db.Text, nullable=False)
+    skills = db.Column(
+        db.Text,
+        nullable=False
+    )
 
-    suggestions = db.Column(db.Text, nullable=False)
+    suggestions = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    # User relation
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey("user.id"),
+        nullable=False
+    )
 
     created_at = db.Column(
         db.DateTime,

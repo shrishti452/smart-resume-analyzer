@@ -8,6 +8,7 @@ from routes.resume import resume_bp
 from models.resume import Resume
 from models.user import User
 from routes.auth import auth_bp
+from routes.dashboard import dashboard_bp
 
 app = Flask(__name__)
 
@@ -25,6 +26,8 @@ app.register_blueprint(upload_bp)
 app.register_blueprint(resume_bp)
 
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
+
+app.register_blueprint(dashboard_bp)
 
 @app.route("/")
 def home():

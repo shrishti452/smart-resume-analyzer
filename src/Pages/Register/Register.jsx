@@ -1,21 +1,30 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 
 function Register() {
+
+    const navigate = useNavigate();
+
     const [name, setName] = useState("");
+
     const [email, setEmail] = useState("");
+
     const [password, setPassword] = useState("");
+
     const [confirmPassword, setConfirmPassword] = useState("");
+
     const [error, setError] = useState("");
+
     const [success, setSuccess] = useState("");
-    function handleSubmit(e) {
+
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
         setError("");
-        setSuccess("");
 
+        setSuccess("");
 
         if (!name || !email || !password || !confirmPassword) {
 
@@ -25,7 +34,6 @@ function Register() {
 
         }
 
-
         if (password !== confirmPassword) {
 
             setError("Passwords do not match");
@@ -34,10 +42,61 @@ function Register() {
 
         }
 
+        try {
 
-        setSuccess("Account created successfully!");
+            const response = await fetch(
+                "http://127.0.0.1:5000/api/auth/register",
+                {
 
-    }
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+
+                    body: JSON.stringify({
+
+                        name,
+
+                        email,
+
+                        password,
+
+                    }),
+
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+
+                setError(data.message);
+
+                return;
+
+            }
+
+            setSuccess(data.message);
+
+            setTimeout(() => {
+
+                navigate("/login");
+
+            }, 1500);
+
+        }
+
+        catch (err) {
+
+            console.error(err);
+
+            setError("Server Error");
+
+        }
+
+    };
+
     return (
 
         <div className="register-page">
@@ -105,16 +164,23 @@ function Register() {
                     </div>
 
                     {error && (
+
                         <p className="error-message">
+
                             {error}
+
                         </p>
+
                     )}
 
-
                     {success && (
+
                         <p className="success-message">
+
                             {success}
+
                         </p>
+
                     )}
 
                     <button
@@ -131,7 +197,9 @@ function Register() {
                     Already have an account?
 
                     <Link to="/login">
+
                         Login
+
                     </Link>
 
                 </p>
@@ -141,6 +209,7 @@ function Register() {
         </div>
 
     );
+
 }
 
 export default Register;
