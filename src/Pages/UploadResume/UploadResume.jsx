@@ -10,9 +10,15 @@ function UploadResume() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [jobDescription, setJobDescription] = useState("");
     const [analysis, setAnalysis] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     const handleUpload = async () => {
 
+        setLoading(true);
+        setError("");
+        setSuccess("");
         if (!selectedFile || !jobDescription) {
             alert("Please upload resume and add job description");
             return;
@@ -62,7 +68,9 @@ function UploadResume() {
 
             if (!response.ok) {
 
-                alert(data.message || "Upload Failed");
+                setLoading(false);
+
+                setError(data.message || "Upload Failed");
 
                 return;
             }
@@ -71,7 +79,10 @@ function UploadResume() {
 
             setAnalysis(data);
 
-            alert(data.message);
+            setSuccess(data.message);
+            setLoading(false);
+
+            setLoading(false);
 
         }
 
@@ -79,175 +90,193 @@ function UploadResume() {
 
             console.error(error);
 
-            alert("Upload Failed");
+            setLoading(false);
+
+            setError("Something went wrong. Please try again.");
 
         }
 
     };
-        return (
+    return (
 
-            <>
+        <>
             <Navbar />
-        <div className="upload-page">
+            <div className="upload-page">
 
-            <div className="upload-container">
+                <div className="upload-container">
 
-                <h1>
-                    Upload Your Resume
-                </h1>
-
-                <p>
-                    Upload your resume and let AI analyze your skills,
-                    ATS compatibility and improvements.
-                </p>
-
-                <div className="upload-card">
-
-                    <div className="upload-icon">
-                        📄
-                    </div>
-
-                    <h2>
-                        Drag & Drop Resume
-                    </h2>
+                    <h1>
+                        Upload Your Resume
+                    </h1>
 
                     <p>
-                        Support PDF and DOCX files
+                        Upload your resume and let AI analyze your skills,
+                        ATS compatibility and improvements.
                     </p>
 
-                    <input
-                        type="file"
-                        accept=".pdf,.doc,.docx"
-                        onChange={(e) => {
-                            setSelectedFile(e.target.files[0]);
-                        }}
-                    />
+                    <div className="upload-card">
 
-                    {selectedFile && (
-                        <p className="selected-file">
-                            Selected File: {selectedFile.name}
-                        </p>
-                    )}
-
-                    <textarea
-                        placeholder="Paste Job Description here..."
-                        value={jobDescription}
-                        onChange={(e) => setJobDescription(e.target.value)}
-                    />
-
-                    <button
-                        disabled={!selectedFile}
-                        onClick={handleUpload}
-                    >
-                        Analyze Resume
-                    </button>
-
-                    {analysis && (
-
-                        <div className="analysis-result">
-
-                            <h2>
-                                Resume Intelligence Report
-                            </h2>
-
-                            <div className="ats-card">
-
-                                <div className="score-circle">
-                                    {analysis.ats_score}%
-                                </div>
-
-                                <div>
-
-                                    <h3>
-                                        ATS Compatibility
-                                    </h3>
-
-                                    <p>
-                                        Resume matching score with job requirements
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div className="result-section">
-
-                                <h3>
-                                    ✅ Matched Skills
-                                </h3>
-
-                                <div className="skill-container">
-
-                                    {analysis.matched_skills.map((skill, index) => (
-
-                                        <span
-                                            className="skill-badge"
-                                            key={index}
-                                        >
-                                            {skill}
-                                        </span>
-
-                                    ))}
-
-                                </div>
-
-                            </div>
-
-                            <div className="result-section">
-
-                                <h3>
-                                    ⚠️ Missing Skills
-                                </h3>
-
-                                <div className="skill-container">
-
-                                    {analysis.missing_skills.map((skill, index) => (
-
-                                        <span
-                                            className="missing-badge"
-                                            key={index}
-                                        >
-                                            {skill}
-                                        </span>
-
-                                    ))}
-
-                                </div>
-
-                            </div>
-
-                            <div className="result-section">
-
-                                <h3>
-                                    🤖 AI Suggestions
-                                </h3>
-
-                                <div className="suggestion-container">
-
-                                    {analysis.suggestions.map((item, index) => (
-
-                                        <div
-                                            className="suggestion-card"
-                                            key={index}
-                                        >
-                                            💡 {item}
-                                        </div>
-
-                                    ))}
-
-                                </div>
-
-                            </div>
-
+                        <div className="upload-icon">
+                            📄
                         </div>
 
-                    )}
+                        <h2>
+                            Drag & Drop Resume
+                        </h2>
+
+                        <p>
+                            Support PDF and DOCX files
+                        </p>
+
+                        <input
+                            type="file"
+                            accept=".pdf,.doc,.docx"
+                            onChange={(e) => {
+                                setSelectedFile(e.target.files[0]);
+                            }}
+                        />
+
+                        {selectedFile && (
+                            <p className="selected-file">
+                                Selected File: {selectedFile.name}
+                            </p>
+                        )}
+
+                        <textarea
+                            placeholder="Paste Job Description here..."
+                            value={jobDescription}
+                            onChange={(e) => setJobDescription(e.target.value)}
+                        />
+
+                        {
+                            error && (
+                                <div className="error-message">
+                                    {error}
+                                </div>
+                            )
+                        }
+
+                        {
+                            success && (
+                                <div className="success-message">
+                                    {success}
+                                </div>
+                            )
+                        }
+
+                        <button
+                            disabled={!selectedFile || loading}
+                            onClick={handleUpload}
+                        >
+                            {loading ? "Analyzing..." : "Analyze Resume"}
+                        </button>
+
+                        {analysis && (
+
+                            <div className="analysis-result">
+
+                                <h2>
+                                    Resume Intelligence Report
+                                </h2>
+
+                                <div className="ats-card">
+
+                                    <div className="score-circle">
+                                        {analysis.ats_score}%
+                                    </div>
+
+                                    <div>
+
+                                        <h3>
+                                            ATS Compatibility
+                                        </h3>
+
+                                        <p>
+                                            Resume matching score with job requirements
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                <div className="result-section">
+
+                                    <h3>
+                                        ✅ Matched Skills
+                                    </h3>
+
+                                    <div className="skill-container">
+
+                                        {analysis.matched_skills.map((skill, index) => (
+
+                                            <span
+                                                className="skill-badge"
+                                                key={index}
+                                            >
+                                                {skill}
+                                            </span>
+
+                                        ))}
+
+                                    </div>
+
+                                </div>
+
+                                <div className="result-section">
+
+                                    <h3>
+                                        ⚠️ Missing Skills
+                                    </h3>
+
+                                    <div className="skill-container">
+
+                                        {analysis.missing_skills.map((skill, index) => (
+
+                                            <span
+                                                className="missing-badge"
+                                                key={index}
+                                            >
+                                                {skill}
+                                            </span>
+
+                                        ))}
+
+                                    </div>
+
+                                </div>
+
+                                <div className="result-section">
+
+                                    <h3>
+                                        🤖 AI Suggestions
+                                    </h3>
+
+                                    <div className="suggestion-container">
+
+                                        {analysis.suggestions.map((item, index) => (
+
+                                            <div
+                                                className="suggestion-card"
+                                                key={index}
+                                            >
+                                                💡 {item}
+                                            </div>
+
+                                        ))}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        )}
+
+                    </div>
 
                 </div>
 
             </div>
-
-        </div>
         </>
 
     );

@@ -41,9 +41,21 @@ function ResumeHistory({ resumes }) {
 
                 ) : (
 
-                    <p>
-                        No resume history available.
-                    </p>
+                    <div className="history-empty">
+
+                        <div className="empty-icon">
+                            📄
+                        </div>
+
+                        <h3>
+                            No Resume History
+                        </h3>
+
+                        <p>
+                            Upload your first resume to start tracking your analysis.
+                        </p>
+
+                    </div>
 
                 )
             }

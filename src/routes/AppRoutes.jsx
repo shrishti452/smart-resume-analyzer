@@ -7,6 +7,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import UploadResume from "../pages/UploadResume/UploadResume";
 import ProtectedRoute from "../components/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute";
+import NotFound from "../pages/NotFound/NotFound";
 
 function AppRoutes() {
     return (
@@ -47,9 +48,9 @@ function AppRoutes() {
                         </ProtectedRoute>
                     }
                 />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );
 }
-
 export default AppRoutes;
