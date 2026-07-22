@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Config:
@@ -7,6 +10,6 @@ class Config:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    SECRET_KEY = "smart_resume_analyzer_secret_key"
+    SECRET_KEY = os.getenv("SECRET_KEY")
 
-    JWT_SECRET_KEY = "smart_resume_jwt_secret_key"
+    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
