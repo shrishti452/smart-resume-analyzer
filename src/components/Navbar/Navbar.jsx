@@ -14,11 +14,11 @@ function Navbar() {
 
     const handleLogout = () => {
 
-    logout();
+        logout();
 
-    navigate("/login", { replace: true });
+        navigate("/login", { replace: true });
 
-};
+    };
 
 
     return (
@@ -34,7 +34,7 @@ function Navbar() {
             </div>
 
 
-            <ul className="nav-links">
+            <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
 
                 <li>
                     <a href="/dashboard">
@@ -52,7 +52,7 @@ function Navbar() {
 
 
 
-            <div className="nav-buttons">
+            <div className={`nav-buttons ${menuOpen ? "active" : ""}`}>
 
 
                 {token ? (
@@ -84,7 +84,7 @@ function Navbar() {
                 className="menu-icon"
                 onClick={() => setMenuOpen(!menuOpen)}
             >
-                ☰
+                {menuOpen ? "✕" : "☰"}
             </div>
 
 
