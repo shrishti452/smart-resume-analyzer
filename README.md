@@ -1,16 +1,326 @@
-# React + Vite
+# 🚀 Smart Resume Analyzer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered resume analysis platform that helps job seekers evaluate their resumes, check ATS compatibility, identify skill gaps, and get personalized improvement suggestions based on job descriptions.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 Overview
 
-## React Compiler
+Smart Resume Analyzer is a full-stack web application designed to help candidates improve their resumes before applying for jobs.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Users can upload their resume, provide a target job description, and receive an automated analysis containing:
 
-## Expanding the ESLint configuration
+* ATS compatibility score
+* Matched skills
+* Missing skills
+* Resume improvement suggestions
+* Previous analysis history
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The current Version 1 ATS engine focuses on resume content analysis, keyword/skill matching, and job description comparison.
+
+Future versions will include advanced ATS factors such as semantic similarity, project relevance, experience analysis, certifications, and AI-powered resume recommendations.
+
+---
+
+# ✨ Features
+
+## 👤 Authentication
+
+* User registration and login
+* JWT-based authentication
+* Protected routes
+* Secure password hashing using bcrypt
+
+---
+
+## 📄 Resume Analysis
+
+* Upload PDF resumes
+* Extract resume text automatically
+* Analyze resume according to job description
+* Generate ATS compatibility score
+* Detect matched skills
+* Identify missing skills
+* Provide improvement suggestions
+
+---
+
+## 📊 Dashboard
+
+* View previous resume analyses
+* Track ATS scores
+* Access resume history
+* Manage uploaded resume reports
+
+---
+
+# 🤖 AI Integration
+
+The project uses AI and NLP-based techniques for intelligent resume analysis:
+
+* Resume text extraction
+* Natural Language Processing concepts
+* Skill identification
+* Job description matching
+* Automated feedback generation
+
+### Future AI Improvements (Version 2)
+
+* Semantic similarity using embeddings
+* LLM-based resume feedback
+* Experience and project impact analysis
+* Industry-specific resume recommendations
+* Advanced ATS scoring model
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* React.js
+* Vite
+* React Router
+* JavaScript (ES6+)
+* CSS3
+
+## Backend
+
+* Python
+* Flask
+* Flask-JWT-Extended
+* Flask-SQLAlchemy
+* Flask-Bcrypt
+* Flask-CORS
+
+## Database
+
+* SQLite
+* SQLAlchemy ORM
+
+## Tools & Deployment
+
+* Git & GitHub
+* VS Code
+* Render (Backend Deployment)
+* Vercel (Frontend Deployment)
+
+---
+
+# 📂 Project Structure
+
+```text
+Smart-Resume-Analyzer
+
+│
+├── src
+│   │
+│   ├── components
+│   │   ├── Navbar
+│   │   ├── Hero
+│   │   ├── UploadResume
+│   │   └── Footer
+│   │
+│   ├── Pages
+│   │   ├── Login
+│   │   ├── Register
+│   │   └── Dashboard
+│   │
+│   ├── context
+│   │   └── AuthContext
+│   │
+│   ├── routes
+│   │   └── AppRoutes
+│   │
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── backend
+│   │
+│   ├── models
+│   ├── routes
+│   ├── services
+│   ├── utils
+│   ├── uploads
+│   │
+│   ├── app.py
+│   ├── config.py
+│   ├── extensions.py
+│   └── requirements.txt
+│
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+---
+
+# ⚙️ Installation & Setup
+
+## 1. Clone Repository
+
+```bash
+git clone <repository-url>
+```
+
+---
+
+# Frontend Setup
+
+Go to project root directory:
+
+```bash
+cd Smart-Resume-Analyzer
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create `.env` file:
+
+```env
+VITE_API_URL=your_backend_url
+```
+
+Run frontend:
+
+```bash
+npm run dev
+```
+
+Frontend will run on:
+
+```
+http://localhost:5173
+```
+
+---
+
+# Backend Setup
+
+Navigate to backend folder:
+
+```bash
+cd backend
+```
+
+Create virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Activate virtual environment:
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Create `.env` file:
+
+```env
+SECRET_KEY=your_secret_key
+JWT_SECRET_KEY=your_jwt_secret
+```
+
+Run backend server:
+
+```bash
+python app.py
+```
+
+Backend will run on:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+# 🔗 API Endpoints
+
+## Authentication
+
+| Method | Endpoint    | Description       |
+| ------ | ----------- | ----------------- |
+| POST   | `/register` | Register new user |
+| POST   | `/login`    | Login user        |
+
+---
+
+## Resume Analysis
+
+| Method | Endpoint   | Description               |
+| ------ | ---------- | ------------------------- |
+| POST   | `/upload`  | Upload and analyze resume |
+| GET    | `/resumes` | Fetch resume history      |
+
+---
+
+# 📈 ATS Score Working (Version 1)
+
+The ATS score is generated by comparing:
+
+* Resume extracted text
+* Job description requirements
+* Relevant skills and keywords
+
+The system provides:
+
+✅ ATS compatibility score
+✅ Matched skills
+✅ Missing skills
+✅ Resume improvement suggestions
+
+The current version focuses on content-based matching. More advanced ATS evaluation features will be added in future versions.
+
+---
+
+# 🌐 Deployment
+
+## Frontend
+
+Deployed using:
+
+* Vercel
+
+## Backend
+
+Deployed using:
+
+* Render
+
+---
+
+# 🔮 Future Enhancements (Version 2)
+
+* Advanced AI resume evaluation
+* Better NLP-based matching
+* Resume ranking system
+* Cover letter generation
+* AI resume improvement assistant
+* Job-specific resume optimization
+* Multiple resume comparison
+
+---
+
+# 👩‍💻 Author
+
+## Shrishti Agarwal
+
+B.Tech Computer Science Engineering (AI & ML)
+
+---
+
+⭐ If you like this project, consider giving it a star!
