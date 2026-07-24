@@ -70,12 +70,13 @@ def upload_resume():
 
     # Save in Database
     resume = Resume(
-        filename=file.filename,
-        ats_score=ats_score,
-        skills=", ".join(extracted_skills),
-        suggestions="\n".join(suggestions),
-        user_id=user_id
-    )
+    filename=file.filename,
+    ats_score=ats_score,
+    skills=", ".join(extracted_skills),
+    matched_skills=", ".join(matched_skills),
+    suggestions="\n".join(suggestions),
+    user_id=user_id
+)
 
     db.session.add(resume)
     db.session.commit()

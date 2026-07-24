@@ -27,6 +27,11 @@ class Resume(db.Model):
         nullable=False
     )
 
+    matched_skills = db.Column(
+    db.Text,
+    nullable=False
+)
+
     suggestions = db.Column(
         db.Text,
         nullable=False
