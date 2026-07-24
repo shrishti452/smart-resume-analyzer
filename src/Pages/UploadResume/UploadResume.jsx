@@ -181,7 +181,7 @@ function UploadResume() {
 
                                 <div className="ats-card">
 
-                                    <div className="score-circle">
+                                    <div className="upload-score-circle">
                                         {analysis.ats_score}%
                                     </div>
 
